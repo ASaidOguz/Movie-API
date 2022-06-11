@@ -11,6 +11,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
+const PORT = ":8000"
+
 type Movie struct {
 	ID       string    `json:"id"`
 	Isbn     string    `json:"isbn"`
@@ -97,9 +99,9 @@ func main() {
 	r.HandleFunc("/movies/{id}", getMovie).Methods("GET")
 	r.HandleFunc("/movies", createMovie).Methods("POST")
 	r.HandleFunc("/movies/{id}", updateMovie).Methods("PUT")
-	r.HandleFunc("/movies{id}", DeleteMovie).Methods("DELETE")
+	r.HandleFunc("/movies/{id}", DeleteMovie).Methods("DELETE")
 
-	fmt.Println("Start server in :8080")
+	fmt.Println("Start server in :", PORT)
 
-	log.Fatal(http.ListenAndServe(":8080", r))
+	log.Fatal(http.ListenAndServe(PORT, r))
 }
